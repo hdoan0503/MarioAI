@@ -12,7 +12,7 @@ public class BehaviorTree {
         this.behaviorTreeAgent = behaviorTreeAgent;
     }
 
-    public void addChildToTask(Task child){
+    public void pushBack(Task child){
         tasks.add(child);
     }
 }

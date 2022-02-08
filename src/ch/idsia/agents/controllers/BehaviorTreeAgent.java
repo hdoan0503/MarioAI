@@ -1,12 +1,22 @@
 package ch.idsia.agents.controllers;
 
 import ch.idsia.agents.Agent;
+import ch.idsia.agents.controllers.tree.MoveRight;
+import ch.idsia.agents.controllers.tree.Sequence;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.benchmark.mario.engine.sprites.Sprite;
+import ch.idsia.benchmark.tasks.Task;
+
+import java.util.ArrayList;
 
 public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
     public BehaviorTreeAgent(String s) {
         super(s);
+        reset();
+
+        ArrayList<Task> task1 = new ArrayList<>();
+
+
     }
 
     public void keyRight() {

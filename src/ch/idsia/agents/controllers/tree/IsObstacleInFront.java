@@ -2,7 +2,7 @@ package ch.idsia.agents.controllers.tree;
 
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class IsObstacleInFront extends Task implements Conditions{
+public class IsObstacleInFront extends Task {
 
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {

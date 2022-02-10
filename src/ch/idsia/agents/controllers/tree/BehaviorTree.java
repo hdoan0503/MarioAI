@@ -8,9 +8,9 @@ public class BehaviorTree {
     public BehaviorTreeAgent behaviorTreeAgent;
     public ArrayList<Task> tasks;
 
-    public BehaviorTree(BehaviorTreeAgent behaviorTreeAgent, ArrayList<Task> tasks) {
+    public BehaviorTree(BehaviorTreeAgent behaviorTreeAgent) {
+        tasks = new ArrayList<>();
         this.behaviorTreeAgent = behaviorTreeAgent;
-        this.tasks = tasks;
     }
 
     public void pushBack(Task child){
@@ -19,7 +19,7 @@ public class BehaviorTree {
 
     public void run() {
         for(Task t: tasks) {
-            if(t.run(behaviorTreeAgent) == 1) {
+            if(t.run(behaviorTreeAgent) == Task.TASK_SUCCESS) {
                 break;
             }
         }

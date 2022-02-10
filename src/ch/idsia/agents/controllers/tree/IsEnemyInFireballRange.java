@@ -2,7 +2,7 @@ package ch.idsia.agents.controllers.tree;
 
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class IsEnemyInFireballRange extends Task implements Conditions{
+public class IsEnemyInFireballRange extends Task {
 
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {

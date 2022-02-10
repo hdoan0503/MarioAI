@@ -2,7 +2,7 @@ package ch.idsia.agents.controllers.tree;
 
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class MoveRight extends Task implements Actions {
+public class MoveRight extends Task {
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {
         behaviorTreeAgent.keyRight();

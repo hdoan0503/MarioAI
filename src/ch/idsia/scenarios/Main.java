@@ -27,6 +27,7 @@
 
 package ch.idsia.scenarios;
 
+import ch.idsia.agents.controllers.BehaviorTreeAgent;
 import ch.idsia.benchmark.tasks.BasicTask;
 import ch.idsia.tools.MarioAIOptions;
 
@@ -38,14 +39,15 @@ public final class Main
 {
 public static void main(String[] args)
 {
-//        final String argsString = "-vis on";
-    final MarioAIOptions marioAIOptions = new MarioAIOptions(args);
+        final String test1 = "-ag ch.idsia.agents.controllers.BehaviorTreeAgent";
+        final MarioAIOptions marioAIOptions = new MarioAIOptions(test1);
 //        final Environment environment = new MarioEnvironment();
 //        final Agent agent = new ForwardAgent();
 //        final Agent agent = marioAIOptions.getAgent();
 //        final Agent a = AgentsPool.loadAgent("ch.idsia.controllers.agents.controllers.ForwardJumpingAgent");
+
     final BasicTask basicTask = new BasicTask(marioAIOptions);
-//        for (int i = 0; i < 10; ++i)
+//        for (int i = 0; i < 10; ++i)d
 //        {
 //            int seed = 0;
 //            do

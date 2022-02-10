@@ -2,14 +2,14 @@ package ch.idsia.agents.controllers.tree;
 
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class IsEnemyInFront extends Task {
-
+public class IsSafeInFront extends Task {
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {
-        if (behaviorTreeAgent.isEnemyFront()) {
+        if(behaviorTreeAgent.isSafeFront()) {
+            System.out.println("SafeFront");
             return TASK_SUCCESS;
         }
-        else{
+        else {
             return TASK_FAILURE;
         }
     }

@@ -2,14 +2,14 @@ package ch.idsia.agents.controllers.tree;
 
 import ch.idsia.agents.controllers.BehaviorTreeAgent;
 
-public class IsEnemyInFront extends Task {
-
+public class IsAbleToJump extends Task{
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {
-        if (behaviorTreeAgent.isEnemyFront()) {
+        if(behaviorTreeAgent.isAbleJump()) {
+            System.out.println("Dangerous");
             return TASK_SUCCESS;
         }
-        else{
+        else {
             return TASK_FAILURE;
         }
     }

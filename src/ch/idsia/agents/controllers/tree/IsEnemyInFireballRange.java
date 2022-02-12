@@ -6,7 +6,7 @@ public class IsEnemyInFireballRange extends Task {
 
     @Override
     public int run(BehaviorTreeAgent behaviorTreeAgent) {
-        if(behaviorTreeAgent.isMarioAbleToShoot()) {
+        if(behaviorTreeAgent.isAbleShoot()) {
             System.out.println("InShootRange");
             return TASK_SUCCESS;
         }

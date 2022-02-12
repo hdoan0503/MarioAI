@@ -17,11 +17,10 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
         behaviorTree = new BehaviorTree(this);
 
         Task shoot = new ShootFireBall();
-        Task isEnemyInFront = new IsEnemyInFront();
-        Task moveRight = new MoveRight();
-        Task jump = new Jump();
-        Task isObstacleInFront = new IsObstacleInFront();
         Task isEnemyInFireballRange = new IsEnemyInFireballRange();
+        Task isAbleToJump = new IsAbleToJump();
+        Task jump = new Jump();
+        Task moveRight = new MoveRight();
         Task isSafeInFront = new IsSafeInFront();
 
         List<Task> childrenSeq1 = new ArrayList<>();
@@ -29,27 +28,20 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
         childrenSeq1.add(shoot);
 
         List<Task> childrenSeq2 = new ArrayList<>();
-        childrenSeq2.add(isObstacleInFront);
-        childrenSeq2.add(jump);
+        childrenSeq2.add(isSafeInFront);
+        childrenSeq2.add(moveRight);
 
         List<Task> childrenSeq3 = new ArrayList<>();
-        childrenSeq3.add(isEnemyInFront);
+        childrenSeq3.add(isAbleToJump);
         childrenSeq3.add(jump);
-
-        List<Task> childrenSeq4 = new ArrayList<>();
-        childrenSeq4.add(isSafeInFront);
-        childrenSeq4.add(moveRight);
 
         Sequence s1 = new Sequence(childrenSeq1);
         Sequence s2 = new Sequence(childrenSeq2);
         Sequence s3 = new Sequence(childrenSeq3);
-        Sequence s4 = new Sequence(childrenSeq4);
-
 
         behaviorTree.pushBack(s1);
         behaviorTree.pushBack(s2);
         behaviorTree.pushBack(s3);
-        behaviorTree.pushBack(s4);
 
     }
 
@@ -62,12 +54,9 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
     }
 
     public void keyShoot() {
-        action[Mario.KEY_SPEED] = isMarioAbleToShoot;
+        action[Mario.KEY_SPEED] = true;
     }
 
-    public boolean isMarioAbleToShoot() {
-        return isMarioAbleToShoot;
-    }
 
     public boolean isCreature(int kind) {
         switch (kind) {
@@ -85,8 +74,8 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
         int x = marioEgoRow;
         int y = marioEgoCol;
 
-        return isCreature(enemies[x][y + 3])
-                || isCreature(enemies[x][y + 2])
+
+        return  isCreature(enemies[x][y + 2])
                 || isCreature(enemies[x][y + 1])
                 || isCreature(enemies[x + 1][y + 1]);
     }
@@ -95,8 +84,7 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
         int x = marioEgoRow;
         int y = marioEgoCol;
 
-        return levelScene[x][y + 3] != 0
-                || levelScene[x][y + 2] != 0
+        return  levelScene[x][y + 2] != 0
                 || levelScene[x][y + 1] != 0
                 || levelScene[x + 1][y + 1] != 0;
     }
@@ -104,6 +92,42 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
     public boolean isSafeFront() {
         return !isEnemyFront() && !isObstacleFront();
     }
+
+    public boolean wallRight(){
+        return levelScene[marioEgoRow][marioEgoCol + 1] == -60 //BORDER_CANNOT_PASS_THROUGH
+                || levelScene[marioEgoRow][marioEgoCol + 1] == -85 //FLOWER_POT_OR_CANNON
+                || levelScene[marioEgoRow][marioEgoCol + 1] == -24 //BREAKABLE BRICK WITH QUESTION MARK
+                || levelScene[marioEgoRow][marioEgoCol + 1] == -20; //BREAKABLE BRICK
+    }
+
+    public boolean brickAbove(){
+        return levelScene[marioEgoRow][marioEgoCol] == -24
+                || levelScene[marioEgoRow - 1][marioEgoCol] == -24
+                || levelScene[marioEgoRow - 2][marioEgoCol] == -24;
+    }
+
+
+    public boolean isAbleJump() {
+        return (wallRight()
+                || brickAbove()
+                || isEnemyFront())
+                && (isMarioAbleToJump
+                || !isMarioOnGround);
+    }
+
+    public boolean isAbleShoot() {
+        int x = marioEgoRow;
+        int y = marioEgoCol;
+
+        return (isCreature(enemies[x][y])
+                || isCreature(enemies[x - 1][y])
+                || isCreature(enemies[x - 2][y])
+                || isCreature(enemies[x - 1][y + 1])
+                || isCreature(enemies[x - 2][y + 2])
+                || isEnemyFront())
+                && isMarioAbleToShoot;
+    }
+
 
     public boolean[] getAction(){
         reset();
@@ -114,6 +138,7 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
     public void reset()
     {
         action = new boolean[Environment.numberOfKeys];
+        action[Mario.KEY_RIGHT] = true;
     }
 
 }

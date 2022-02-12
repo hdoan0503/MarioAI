@@ -9,8 +9,6 @@ public class IsSafeInFront extends Task {
             System.out.println("SafeFront");
             return TASK_SUCCESS;
         }
-        else {
-            return TASK_FAILURE;
-        }
+        return TASK_FAILURE;
     }
 }

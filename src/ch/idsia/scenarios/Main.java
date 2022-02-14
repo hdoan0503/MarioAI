@@ -47,7 +47,7 @@ public static void main(String[] args)
 //        final Agent a = AgentsPool.loadAgent("ch.idsia.controllers.agents.controllers.ForwardJumpingAgent");
 
     final BasicTask basicTask = new BasicTask(marioAIOptions);
-//        for (int i = 0; i < 10; ++i)d
+//        for (int i = 0; i < 10; ++i)
 //        {
 //            int seed = 0;
 //            do

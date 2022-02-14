@@ -35,13 +35,13 @@ public class BehaviorTreeAgent extends BasicMarioAIAgent implements Agent {
         childrenSeq3.add(isAbleToJump);
         childrenSeq3.add(jump);
 
-        Sequence s1 = new Sequence(childrenSeq1);
-        Sequence s2 = new Sequence(childrenSeq2);
-        Sequence s3 = new Sequence(childrenSeq3);
+        Composite c1 = new Sequence(childrenSeq1);
+        Composite c2 = new Sequence(childrenSeq2);
+        Composite c3 = new Sequence(childrenSeq3);
 
-        behaviorTree.pushBack(s1);
-        behaviorTree.pushBack(s2);
-        behaviorTree.pushBack(s3);
+        behaviorTree.pushBack(c1);
+        behaviorTree.pushBack(c2);
+        behaviorTree.pushBack(c3);
 
     }
 

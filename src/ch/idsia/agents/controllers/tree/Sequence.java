@@ -8,6 +8,7 @@ public class Sequence extends Composite {
     protected List<Task> current;
 
     public Sequence(List<Task> children) {
+        super(children);
         current = children;
     }
 
